@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x38"
+    android:background="@color/colorBlue"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/v_title_btn_back_icon"
+        android:layout_width="@dimen/x40"
+        android:layout_height="@dimen/x30"
+        android:layout_centerVertical="true"
+        android:background="@drawable/slt_btn_back"
+        android:paddingBottom="@dimen/x4"
+        android:paddingLeft="@dimen/x10"
+        android:paddingRight="@dimen/x8"
+        android:paddingTop="@dimen/x4"
+        android:scaleType="fitXY"
+        android:src="@drawable/to_back_icon" />
+
+    <TextView
+        android:id="@+id/v_title_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="title"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x10"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/v_title_tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x4"
+            android:textSize="12sp"
+            android:clickable="true"
+            android:text="" />
+
+        <ImageButton
+            android:visibility="gone"
+            android:id="@+id/v_title_btn_right"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:background="@drawable/slt_btn_back" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

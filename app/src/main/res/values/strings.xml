@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">沃农</string>
+
+    <string name="socketTimeout">连接超时</string>
+    <string name="socketException">连接不到服务器</string>
+    <string name="httpLinkFailed">连接失败请重新连接</string>
+    <string name="back">返回</string>
+    <string name="backToLogin">退出</string>
+</resources>

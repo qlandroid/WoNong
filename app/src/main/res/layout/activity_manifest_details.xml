@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_manifest_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.shqtn.wonong.ui.activity.ManifestDetailsActivity">
+
+    <com.shqtn.wonong.ui.widget.TitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x42"
+        app:title="任务详情" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="6dp"
+        android:background="@color/colorBlue"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <com.shqtn.wonong.ui.widget.LabelTextView
+            android:id="@+id/ltv_manifest_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:color="@color/text_white_color"
+            app:labelText="任务单号"
+            app:size="14sp" />
+
+        <com.shqtn.wonong.ui.widget.LabelTextView
+            android:id="@+id/ltv_work_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:color="@color/text_white_color"
+            app:labelText="部门名称"
+            app:size="14sp" />
+
+        <com.shqtn.wonong.ui.widget.LabelTextView
+            android:id="@+id/ltv_gongyingshang__name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:color="@color/text_white_color"
+            app:labelText="供应商名称"
+            app:size="14sp" />
+
+        <com.shqtn.wonong.ui.widget.LabelTextView
+            android:id="@+id/ltv_goods_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:color="@color/text_white_color"
+            app:labelText="货品名称"
+            app:size="14sp" />
+
+        <com.shqtn.wonong.ui.widget.LabelTextView
+            android:id="@+id/ltv_goods_qty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:color="@color/text_white_color"
+            app:labelText="数量"
+            app:size="14sp" />
+
+    </LinearLayout>
+
+    <GridView
+        android:verticalSpacing="6dp"
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="6dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/manifest_details_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提交" />
+
+</LinearLayout>
