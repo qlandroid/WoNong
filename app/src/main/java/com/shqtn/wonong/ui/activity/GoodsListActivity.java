@@ -1,6 +1,7 @@
 package com.shqtn.wonong.ui.activity;
 
 import android.ql.bindview.BindView;
+import android.text.TextUtils;
 import android.widget.ListView;
 
 import com.shqtn.wonong.C;
@@ -37,11 +38,28 @@ public class GoodsListActivity extends BaseActivity {
         adapter = new CommonAdapter<ManifestDetails>(this, mGoods, R.layout.item_goods) {
             @Override
             public void setItemContent(ViewHolder holder, ManifestDetails manifestDetails, int position) {
-                holder.setLabel(R.id.ltv_manifest_no, manifestDetails.getCcode())
-                        .setLabel(R.id.ltv_gongyingshang__name, manifestDetails.getCvenname())
-                        .setLabel(R.id.ltv_goods_qty, manifestDetails.getIquantity())
-                        .setLabel(R.id.ltv_goods_name, manifestDetails.getCinvname())
-                        .setLabel(R.id.ltv_work_name, manifestDetails.getCdepcode());
+                String ccode = manifestDetails.getCcode();
+                if (!TextUtils.isEmpty(ccode)) {
+                    holder.setLabel(R.id.ltv_manifest_no, ccode);
+                }
+                String cvenname = manifestDetails.getCvenname();
+                if (!TextUtils.isEmpty(cvenname)) {
+                    holder.setLabel(R.id.ltv_gongyingshang__name, cvenname);
+                }
+                String iquantity = manifestDetails.getIquantity();
+                if (!TextUtils.isEmpty(iquantity)) {
+                    holder.setLabel(R.id.ltv_goods_qty, iquantity);
+                }
+
+                String cinvname = manifestDetails.getCinvname();
+                if (!TextUtils.isEmpty(cinvname)) {
+                    holder.setLabel(R.id.ltv_goods_name, cinvname);
+                }
+
+                String cdepcode = manifestDetails.getCdepcode();
+                if (!TextUtils.isEmpty(cdepcode)) {
+                    holder.setLabel(R.id.ltv_work_name, cdepcode);
+                }
             }
         };
     }

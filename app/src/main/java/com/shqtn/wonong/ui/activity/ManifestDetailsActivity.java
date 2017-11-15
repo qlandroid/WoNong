@@ -11,6 +11,7 @@ import android.ql.bindview.BindView;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -176,11 +177,32 @@ public class ManifestDetailsActivity extends BaseActivity {
         btnToAddMesasge.setOnClickListener(this);
         btnToSeeMoreData.setOnClickListener(this);
 
-        ltvManifestNo.setText(mFirstManifestDetails.getCcode());
-        ltvGongYIingShangName.setText(mFirstManifestDetails.getCvenname());
-        ltvGoodsQty.setText(mFirstManifestDetails.getIquantity());
-        ltvGoodsName.setText(mFirstManifestDetails.getCinvname());
-        ltvWorkName.setText(mFirstManifestDetails.getCdepcode());
+        String ccode = mFirstManifestDetails.getCcode();
+        if (!TextUtils.isEmpty(ccode)) {
+            ltvManifestNo.setText(ccode);
+        }
+
+        String cvenname = mFirstManifestDetails.getCvenname();
+        if (!TextUtils.isEmpty(cvenname)) {
+            ltvGongYIingShangName.setText(cvenname);
+        }
+
+        String iquantity = mFirstManifestDetails.getIquantity();
+        if (!TextUtils.isEmpty(iquantity)) {
+            ltvGoodsQty.setText(iquantity);
+        }
+
+
+        String cinvname = mFirstManifestDetails.getCinvname();
+        if (!TextUtils.isEmpty(cinvname)) {
+            ltvGoodsName.setText(cinvname);
+        }
+
+        String cdepcode = mFirstManifestDetails.getCdepcode();
+        if (!TextUtils.isEmpty(cdepcode)) {
+            ltvWorkName.setText(cdepcode);
+        }
+
         gridView.setAdapter(mSelectImageAdapter);
         gridView.setNumColumns(4);
         btnSubmit.setOnClickListener(this);
