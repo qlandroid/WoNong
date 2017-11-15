@@ -183,9 +183,9 @@ public class ManifestListActivity extends BaseActivity {
                     if (arrayResult == null || arrayResult.size() == 0) {
                         displayMsgDialog("获得数据出错请联系管理员");
                     } else {
-                        ManifestDetails manifestDetails = arrayResult.get(0);
+
                         Bundle bundle = new Bundle();
-                        bundle.putParcelable(C.MANIFEST_DETAILS, manifestDetails);
+                        bundle.putParcelableArrayList(C.MANIFEST_DETAILS, arrayResult);
                         startActivity(ManifestDetailsActivity.class, bundle);
                     }
 

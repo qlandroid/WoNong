@@ -19,6 +19,11 @@ import com.squareup.okhttp.Request;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.StringWriter;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -85,15 +90,31 @@ public class LoginActivity extends BaseActivity {
 
                             @Override
                             public void onError(Request request, Exception e) {
+                                ByteArrayOutputStream byteArrayInputStream = null;
+                                if (e != null) {
+                                    byteArrayInputStream = new ByteArrayOutputStream();
+                                    e.printStackTrace(new PrintStream(byteArrayInputStream));
+                                }
                                 e.printStackTrace();
                                 if (e instanceof UnknownHostException) {
                                     displayMsgDialog("端口号异常");
                                 } else if (e instanceof SocketTimeoutException) {
                                     displayMsgDialog("连接超时");
                                 } else if (e instanceof SocketException) {
-                                    displayMsgDialog("连接异常");
+
+
+                                    displayMsgDialog("连接异常" + byteArrayInputStream.toString());
                                 } else {
+
                                     displayMsgDialog("连接异常");
+                                }
+
+                                if (byteArrayInputStream != null) {
+                                    try {
+                                        byteArrayInputStream.close();
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
                                 }
                             }
 
@@ -115,6 +136,8 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.login_tv_change_ip:
                 startActivity(IpChangeActivity.class);
+                break;
+            default:
                 break;
         }
     }

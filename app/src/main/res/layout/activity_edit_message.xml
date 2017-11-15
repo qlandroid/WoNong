@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_edit_message"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.shqtn.wonong.ui.activity.EditMessageActivity">
+
+    <com.shqtn.wonong.ui.widget.TitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:title="编辑消息" />
+
+    <EditText
+        android:id="@+id/activity_edit_message_et_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#D3D3D3"
+        android:gravity="start"
+        android:hint="请编辑信息"
+        android:lines="10"
+        android:padding="8dp" />
+
+    <Button
+        android:id="@+id/activity_edit_message_btn_yes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="完成编辑" />
+</LinearLayout>

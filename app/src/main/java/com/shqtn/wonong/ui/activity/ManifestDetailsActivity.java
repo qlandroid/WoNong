@@ -1,6 +1,7 @@
 package com.shqtn.wonong.ui.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.shqtn.wonong.C;
 import com.shqtn.wonong.R;
@@ -53,6 +55,9 @@ public class ManifestDetailsActivity extends BaseActivity {
     protected static final int REQUEST_STORAGE_READ_ACCESS_PERMISSION = 101;
     protected static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 102;
 
+    public static final int REQUEST_EDIT_MSG = 3;
+
+
     @BindView(R.id.ltv_gongyingshang__name)
     LabelTextView ltvGongYIingShangName;
     @BindView(R.id.ltv_goods_name)
@@ -69,8 +74,15 @@ public class ManifestDetailsActivity extends BaseActivity {
     TitleView titleView;
     @BindView(R.id.manifest_details_submit)
     Button btnSubmit;
+    @BindView(R.id.activity_manifest_details_btn_to_add_message)
+    Button btnToAddMesasge;
+    @BindView(R.id.activity_manifest_details_btn_to_see_more_data)
+    Button btnToSeeMoreData;
+    @BindView(R.id.activity_manifest_details_tv_message)
+    TextView tvMessage;
 
-    private ManifestDetails mManifestDetails;
+    private ArrayList<ManifestDetails> mManifestList;
+    private ManifestDetails mFirstManifestDetails;
     CommonAdapter<String> mSelectImageAdapter;
 
     private ArrayList<String> mSelectPath;
@@ -83,16 +95,16 @@ public class ManifestDetailsActivity extends BaseActivity {
         public Bitmap transform(Bitmap source) {
 
             int targetWidth = itemWidth;
-            Log.i(TAG,"source.getHeight()="+source.getHeight()+",source.getWidth()="+source.getWidth()+",targetWidth="+targetWidth);
+            Log.i(TAG, "source.getHeight()=" + source.getHeight() + ",source.getWidth()=" + source.getWidth() + ",targetWidth=" + targetWidth);
 
-            if(source.getWidth()==0){
+            if (source.getWidth() == 0) {
                 return source;
             }
 
             //如果图片小于设置的宽度，则返回原图
-            if(source.getWidth()<targetWidth){
+            if (source.getWidth() < targetWidth) {
                 return source;
-            }else{
+            } else {
                 //如果图片大小大于等于设置的宽度，则按照设置的宽度比例来缩放
                 double aspectRatio = (double) source.getHeight() / (double) source.getWidth();
                 int targetHeight = (int) (targetWidth * aspectRatio);
@@ -115,6 +127,7 @@ public class ManifestDetailsActivity extends BaseActivity {
             return "transformation" + " desiredWidth";
         }
     };
+
     @Override
     protected void createView() {
         setContentView(R.layout.activity_manifest_details);
@@ -127,14 +140,17 @@ public class ManifestDetailsActivity extends BaseActivity {
         int heightPixels = getResources().getDisplayMetrics().heightPixels;
         int widthPixels = getResources().getDisplayMetrics().widthPixels;
         itemWidth = (widthPixels - 20) / 5;
-        mManifestDetails = getBundle().getParcelable(C.MANIFEST_DETAILS);
+
+        mManifestList = getBundle().getParcelableArrayList(C.MANIFEST_DETAILS);
+        mFirstManifestDetails = mManifestList.get(0);
+
         mSelectImageAdapter = new CommonAdapter<String>(this, null, R.layout.item_image) {
             @Override
             public void setItemContent(ViewHolder holder, String s, int position) {
 
                 ViewGroup.LayoutParams layoutParams = holder.getConvertView().getLayoutParams();
                 if (layoutParams == null) {
-                    layoutParams = new ViewGroup.LayoutParams(itemWidth,itemWidth);
+                    layoutParams = new ViewGroup.LayoutParams(itemWidth, itemWidth);
                 }
 
                 layoutParams.width = itemWidth;
@@ -156,11 +172,15 @@ public class ManifestDetailsActivity extends BaseActivity {
     public void initView() {
         super.initView();
         titleView.setOnToBackClickListener(this);
-        ltvManifestNo.setText(mManifestDetails.getCcode());
-        ltvGongYIingShangName.setText(mManifestDetails.getCvenname());
-        ltvGoodsQty.setText(mManifestDetails.getIquantity());
-        ltvGoodsName.setText(mManifestDetails.getCinvname());
-        ltvWorkName.setText(mManifestDetails.getCdepcode());
+
+        btnToAddMesasge.setOnClickListener(this);
+        btnToSeeMoreData.setOnClickListener(this);
+
+        ltvManifestNo.setText(mFirstManifestDetails.getCcode());
+        ltvGongYIingShangName.setText(mFirstManifestDetails.getCvenname());
+        ltvGoodsQty.setText(mFirstManifestDetails.getIquantity());
+        ltvGoodsName.setText(mFirstManifestDetails.getCinvname());
+        ltvWorkName.setText(mFirstManifestDetails.getCdepcode());
         gridView.setAdapter(mSelectImageAdapter);
         gridView.setNumColumns(4);
         btnSubmit.setOnClickListener(this);
@@ -182,8 +202,16 @@ public class ManifestDetailsActivity extends BaseActivity {
             case R.id.manifest_details_submit:
                 upload();
                 break;
+            case R.id.activity_manifest_details_btn_to_add_message:
+                startActivity(EditMessageActivity.class, REQUEST_EDIT_MSG);
+                break;
+            case R.id.activity_manifest_details_btn_to_see_more_data:
+                startActivity(GoodsListActivity.class, getBundle());
+                break;
+            default:
         }
     }
+
 
     private void pickImage() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN // Permission was added in API Level 16
@@ -250,6 +278,11 @@ public class ManifestDetailsActivity extends BaseActivity {
                 }
                 mSelectImageAdapter.update(mShowImagePath);
             }
+        } else if (REQUEST_EDIT_MSG == requestCode) {
+            if (Activity.RESULT_OK == resultCode) {
+                String message = data.getStringExtra("message");
+                tvMessage.setText(message);
+            }
         }
     }
 
@@ -266,7 +299,8 @@ public class ManifestDetailsActivity extends BaseActivity {
         }
 
         Map<String, String> map = new HashMap<>();
-        map.put("code", mManifestDetails.getCcode());
+        map.put("code", mFirstManifestDetails.getCcode());
+        map.put("cdefine", tvMessage.getText().toString());
         PostFormBuilder params = OkHttpUtils.post().params(map);
 
         for (String s : mSelectPath) {

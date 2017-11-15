@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.shqtn.wonong.ui.widget.LabelTextView;
+
 import java.util.List;
 
 /**
@@ -55,7 +57,7 @@ public abstract class CommonAdapter<E> extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = ViewHolder.getViewHolder(mContext, convertView, layoutId);
 
-        setItemContent(holder, getItem(position) ,position);
+        setItemContent(holder, getItem(position), position);
 
         return holder.getConvertView();
     }
@@ -66,7 +68,7 @@ public abstract class CommonAdapter<E> extends BaseAdapter {
      * @param holder
      * @param e
      */
-    public abstract void setItemContent(ViewHolder holder, E e,int position);
+    public abstract void setItemContent(ViewHolder holder, E e, int position);
 
     /**
      * 持有者类（内部类）
@@ -118,10 +120,19 @@ public abstract class CommonAdapter<E> extends BaseAdapter {
             return this;
         }
 
+        /**
+         * 为Item中的TextView设置数据
+         *
+         * @param text
+         */
+        public ViewHolder setLabel(int viewId, CharSequence text) {
+            ((LabelTextView) getViewById(viewId)).setText(text);
+            return this;
+        }
+
 
         /**
          * 为Item中的ImageView设置数据
-         *
          */
         public ViewHolder setImageResource(int viewId, int imgId) {
             ((ImageView) getViewById(viewId)).setImageResource(imgId);
@@ -130,7 +141,6 @@ public abstract class CommonAdapter<E> extends BaseAdapter {
 
         /**
          * 为Item中的ImageView设置数据
-         *
          */
         public ViewHolder setImageBitmap(int viewId, Bitmap bm) {
             ((ImageView) getViewById(viewId)).setImageBitmap(bm);

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBlue"
+    android:padding="8dp"
+    android:orientation="vertical">
+
+    <com.shqtn.wonong.ui.widget.LabelTextView
+        android:id="@+id/ltv_manifest_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:color="@color/text_white_color"
+        app:labelText="任务单号"
+        app:size="14sp" />
+
+    <com.shqtn.wonong.ui.widget.LabelTextView
+        android:id="@+id/ltv_work_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:color="@color/text_white_color"
+        app:labelText="部门名称"
+        app:size="14sp" />
+
+    <com.shqtn.wonong.ui.widget.LabelTextView
+        android:id="@+id/ltv_gongyingshang__name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:color="@color/text_white_color"
+        app:labelText="供应商名称"
+        app:size="14sp" />
+
+    <com.shqtn.wonong.ui.widget.LabelTextView
+        android:id="@+id/ltv_goods_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:color="@color/text_white_color"
+        app:labelText="货品名称"
+        app:size="14sp" />
+
+    <com.shqtn.wonong.ui.widget.LabelTextView
+        android:id="@+id/ltv_goods_qty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:color="@color/text_white_color"
+        app:labelText="数量"
+        app:size="14sp" />
+</LinearLayout>

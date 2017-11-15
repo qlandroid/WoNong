@@ -24,7 +24,9 @@
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.ManifestListActivity" />
         <activity android:name=".ui.activity.ManifestDetailsActivity" />
-        <activity android:name=".ui.activity.IpChangeActivity"></activity>
+        <activity android:name=".ui.activity.IpChangeActivity" />
+        <activity android:name=".ui.activity.EditMessageActivity" />
+        <activity android:name=".ui.activity.GoodsListActivity"></activity>
     </application>
 
 </manifest>

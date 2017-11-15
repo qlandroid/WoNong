@@ -5,8 +5,8 @@
     android:id="@+id/activity_manifest_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context="com.shqtn.wonong.ui.activity.ManifestDetailsActivity">
 
     <com.shqtn.wonong.ui.widget.TitleView
@@ -72,8 +72,33 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/activity_manifest_details_btn_to_see_more_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="查看更多" />
+
+        <Button
+            android:id="@+id/activity_manifest_details_btn_to_add_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="添加描述" />
+    </LinearLayout>
+    <TextView
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:id="@+id/activity_manifest_details_tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <GridView
-        android:verticalSpacing="6dp"
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -81,7 +106,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="6dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:verticalSpacing="6dp" />
 
     <Button
         android:id="@+id/manifest_details_submit"
