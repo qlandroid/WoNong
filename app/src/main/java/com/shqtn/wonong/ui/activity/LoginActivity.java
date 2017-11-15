@@ -3,6 +3,7 @@ package com.shqtn.wonong.ui.activity;
 import android.ql.bindview.BindView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import com.shqtn.wonong.R;
 import com.shqtn.wonong.bean.Result;
 import com.shqtn.wonong.info.ApiUrl;
 import com.shqtn.wonong.ui.base.BaseActivity;
+import com.shqtn.wonong.utils.LoginPreferences;
 import com.shqtn.wonong.utils.StringUtils;
 import com.squareup.okhttp.Request;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -42,6 +44,8 @@ public class LoginActivity extends BaseActivity {
     TextView tvChangeIp;
 
     private String mLoginUrl;
+    private String account;
+    private String pw;
 
     @Override
     protected void createView() {
@@ -54,6 +58,17 @@ public class LoginActivity extends BaseActivity {
         super.initView();
         btnLogin.setOnClickListener(this);
         tvChangeIp.setOnClickListener(this);
+
+        String account = LoginPreferences.getAccount(this);
+        String password = LoginPreferences.getPassword(this);
+        if (!TextUtils.isEmpty(account)) {
+            etAccount.setText(account);
+        }
+        if (!TextUtils.isEmpty(password)) {
+            etPw.setText(password);
+        }
+
+
     }
 
     @Override
@@ -65,8 +80,8 @@ public class LoginActivity extends BaseActivity {
                     displayMsgDialog("请设置ip");
                     return;
                 }
-                String account = etAccount.getText().toString();
-                String pw = etPw.getText().toString();
+                account = etAccount.getText().toString();
+                pw = etPw.getText().toString();
                 if (StringUtils.isEmpty(account)) {
                     displayMsgDialog("请填写账号");
                     return;
@@ -127,7 +142,10 @@ public class LoginActivity extends BaseActivity {
                                 Result result = C.getGson().fromJson(response, Result.class);
                                 if (Result.SUCCESS.equals(result.getMescode())) {
                                     startActivity(ManifestListActivity.class);
+                                    LoginPreferences.save(LoginActivity.this, account, pw);
+
                                     finish();
+
                                 } else {
                                     displayMsgDialog(result.getMesmessage());
                                 }

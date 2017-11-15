@@ -9,6 +9,7 @@ import android.os.Looper;
 import com.shqtn.wonong.utils.IpChangeUtils;
 import com.shqtn.wonong.utils.StringUtils;
 import com.squareup.okhttp.OkHttpClient;
+import com.umeng.analytics.MobclickAgent;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.BufferedWriter;
@@ -50,14 +51,17 @@ public class MyApp extends Application {
         if (StringUtils.isEmpty(port)) {
 
         }
+
+        MobclickAgent.setCatchUncaughtExceptions(true);
+
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Looper.loop();
-                handler = new Handler();
                 Looper.prepare();
+                handler = new Handler();
+                Looper.loop();
             }
         }).start();
     }

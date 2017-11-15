@@ -33,4 +33,8 @@ dependencies {
     compile project(':multi-image-selector')
     compile 'com.zhy:okhttputils:2.0.0'
     compile 'com.google.code.gson:gson:2.8.0'
+    compile files('libs/umeng-analytics-7.4.0.jar')
+    compile files('libs/umeng-common-1.4.0.jar')
+    compile files('libs/utdid4all-1.1.5.3_proguard.jar')
+    compile files('libs/SecurityEnvSDK-release-1.0.0.jar')
 }

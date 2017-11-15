@@ -58,7 +58,7 @@ public class ManifestDetailsActivity extends BaseActivity {
 
     public static final int REQUEST_EDIT_MSG = 3;
 
-
+    int SAVE_IMAGE_MAX_SIZE = 18;
     @BindView(R.id.ltv_gongyingshang__name)
     LabelTextView ltvGongYIingShangName;
     @BindView(R.id.ltv_goods_name)
@@ -243,7 +243,7 @@ public class ManifestDetailsActivity extends BaseActivity {
                     getString(R.string.mis_permission_rationale),
                     REQUEST_STORAGE_READ_ACCESS_PERMISSION);
         } else {
-            int maxNum = 9;
+            int maxNum = SAVE_IMAGE_MAX_SIZE;
 
 
             MultiImageSelector selector = MultiImageSelector.create(ManifestDetailsActivity.this);
@@ -294,7 +294,8 @@ public class ManifestDetailsActivity extends BaseActivity {
                 if (mSelectPath != null) {
                     mShowImagePath.clear();
                     mShowImagePath.addAll(mSelectPath);
-                    if (mSelectPath.size() < 9) {
+
+                    if (mSelectPath.size() < SAVE_IMAGE_MAX_SIZE) {
                         mShowImagePath.add("-1");
                     }
                 }
