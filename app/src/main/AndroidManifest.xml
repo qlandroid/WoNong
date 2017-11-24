@@ -13,7 +13,7 @@
     <application
         android:name=".MyApp"
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@mipmap/wn"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
