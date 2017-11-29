@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.shqtn.wonong.info.ApiUrl;
 import com.shqtn.wonong.utils.IpChangeUtils;
 import com.shqtn.wonong.utils.StringUtils;
 import com.squareup.okhttp.OkHttpClient;
@@ -45,12 +46,7 @@ public class MyApp extends Application {
 
         String ip = IpChangeUtils.getIp(this);
         String port = IpChangeUtils.getPort(this);
-        if (StringUtils.isEmpty(ip)) {
-
-        }
-        if (StringUtils.isEmpty(port)) {
-
-        }
+        ApiUrl.changeBase(ip, port);
 
         MobclickAgent.setCatchUncaughtExceptions(true);
 
