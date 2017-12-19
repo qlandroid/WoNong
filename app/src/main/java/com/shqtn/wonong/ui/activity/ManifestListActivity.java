@@ -181,7 +181,7 @@ public class ManifestListActivity extends BaseActivity {
                 if (Result.SUCCESS.equals(re.getMescode())) {
                     ArrayList<ManifestDetails> arrayResult = DataUtils.getArrayResult(re.getData(), ManifestDetails.class);
                     if (arrayResult == null || arrayResult.size() == 0) {
-                        displayMsgDialog("获得数据出错请联系管理员");
+                        displayMsgDialog("未找到任务单据或当前任务单据下无内容");
                     } else {
 
                         Bundle bundle = new Bundle();

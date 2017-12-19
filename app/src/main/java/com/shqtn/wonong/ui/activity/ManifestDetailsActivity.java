@@ -30,7 +30,9 @@ import com.shqtn.wonong.ui.adapter.CommonAdapter;
 import com.shqtn.wonong.ui.base.BaseActivity;
 import com.shqtn.wonong.ui.widget.LabelTextView;
 import com.shqtn.wonong.ui.widget.TitleView;
+import com.shqtn.wonong.utils.LoginPreferences;
 import com.shqtn.wonong.utils.ResultUtils;
+import com.shqtn.wonong.utils.StringUtils;
 import com.shqtn.wonong.utils.ToastUtils;
 import com.squareup.okhttp.Request;
 import com.squareup.picasso.Picasso;
@@ -58,7 +60,7 @@ public class ManifestDetailsActivity extends BaseActivity {
 
     public static final int REQUEST_EDIT_MSG = 3;
 
-    int SAVE_IMAGE_MAX_SIZE = 18;
+    int SAVE_IMAGE_MAX_SIZE = 30;
     @BindView(R.id.ltv_gongyingshang__name)
     LabelTextView ltvGongYIingShangName;
     @BindView(R.id.ltv_goods_name)
@@ -320,16 +322,24 @@ public class ManifestDetailsActivity extends BaseActivity {
 
             return;
         }
-
+        String account = LoginPreferences.getAccount(this);
+        if (StringUtils.isEmpty(account)) {
+            ToastUtils.show(this, "请登录");
+            return;
+        }
         Map<String, String> map = new HashMap<>();
         map.put("code", mFirstManifestDetails.getCcode());
         map.put("cdefine", tvMessage.getText().toString());
         PostFormBuilder params = OkHttpUtils.post().params(map);
 
-        for (String s : mSelectPath) {
-            params.addFile("test", s, new File(s));
-        }
 
+        for (String s : mSelectPath) {
+            long l = System.currentTimeMillis();
+            String[] split = s.split("/");
+            String endSplit = split[split.length-1];
+            params.addFile("test", String.format("%s_%d__%s",account,l,endSplit), new File(s));
+        }
+        displayProgressDialog("提交中");
 
         params.url(ApiUrl.FILE_UPDATE)
                 .build().execute(new StringCallback() {
@@ -337,11 +347,6 @@ public class ManifestDetailsActivity extends BaseActivity {
             public void onAfter() {
                 super.onAfter();
                 cancelProgressDialog();
-            }
-
-            @Override
-            public void inProgress(float progress) {
-                super.inProgress(progress);
             }
 
             @Override
@@ -353,6 +358,7 @@ public class ManifestDetailsActivity extends BaseActivity {
                 } else {
                     displayMsgDialog("连接异常");
                 }
+                cancelProgressDialog();
                 e.printStackTrace();
             }
 
